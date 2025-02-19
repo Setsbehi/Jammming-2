@@ -4,7 +4,7 @@ import Track from "../Track/Track";
 export default function TrackList(props) {
   return (
     <div className="TrackList">
-      {props.tracks.lenght &&
+      {props.tracks.length &&
         props.tracks?.map((track) => {
           return (
             <Track

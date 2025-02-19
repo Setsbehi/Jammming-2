@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
+import Spotify from "../../util/Spotify";
 import "./App.css";
-import { useCallback } from "react";
 
 export default function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -13,14 +13,14 @@ export default function App() {
   const addTrack = useCallback(
     (track) => {
       if (playlistTracks.some((saveTrack) => saveTrack.id === track.id)) return;
-      setPlaylistTracks((prevTrack) => [...prevTracks, track]);
+      setPlaylistTracks((prevTracks) => [...prevTracks, track]);
     },
     [playlistTracks]
   );
 
   const removeTrack = useCallback((track) => {
-    setPlaylistTracks((prevTrack) =>
-      prevTrack.filter((currentTrack) => currentTrack.id !== track.id)
+    setPlaylistTracks((prevTracks) =>
+      prevTracks.filter((currentTrack) => currentTrack.id !== track.id)
     );
   }, []);
 
@@ -37,7 +37,9 @@ export default function App() {
   }, [playlistName, playlistTracks]);
 
   const search = useCallback((term) => {
-    Spotify.search(term).then(setSearchResults);
+    Spotify.search(term).then((data) => {
+      setSearchResults(data);
+    });
   }, []);
 
   return (

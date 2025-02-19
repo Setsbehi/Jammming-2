@@ -20,7 +20,7 @@ export default function SearchBar(props) {
         onChange={handleTermChange}
       />
       <button className="SearchButton" onClick={search}>
-        Search
+        SEARCH
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import "./Track";
+import "./Track.css";
 
 export default function Track(props) {
   const addTrack = useCallback(
@@ -19,27 +19,27 @@ export default function Track(props) {
   const renderAction = () => {
     if (props.isRemoval) {
       return (
-        <button class="Track-button" onclick={removeTrack}>
+        <button className="Track-action" onClick={removeTrack}>
           -
         </button>
       );
     }
     return (
-      <button class="Track-button" onClick={addTrack}>
+      <button className="Track-action" onClick={addTrack}>
         +
       </button>
     );
   };
 
   return (
-    <div class="Track">
-      <div class="Track-information">
+    <div className="Track">
+      <div className="Track-information">
         <h3>{props.track.name}</h3>
         <p>
           {props.track.artist} | {props.track.album}
         </p>
       </div>
-      {renderAction}
+      {renderAction()}
     </div>
   );
 }
